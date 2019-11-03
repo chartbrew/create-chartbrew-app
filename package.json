@@ -1,0 +1,35 @@
+{
+  "name": "create-chartbrew-app",
+  "version": "1.0.0",
+  "description": "CLI tool for generating a new ChartBrew app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create-chartbrew-app": "bin/create-chartbrew-app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razvanilin/create-chartbrew-app.git"
+  },
+  "author": "Razvan Ilin (razvanilin@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/razvanilin/create-chartbrew-app/issues"
+  },
+  "homepage": "https://github.com/razvanilin/create-chartbrew-app#readme",
+  "dependencies": {
+    "boxen": "^4.1.0",
+    "chalk": "^2.4.2",
+    "child-process-promise": "^2.2.1",
+    "commander": "^4.0.0",
+    "ncp": "^2.0.0",
+    "npm-run": "^4.1.2",
+    "prompts": "^2.2.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "rimraf": "^3.0.0",
+    "unzipper": "^0.10.5"
+  }
+}
