@@ -1,9 +1,12 @@
 const fs = require("fs");
 const requestP = require("request-promise");
 const request = require("request");
-const unzip = require("unzipper");
 const ncp = require("ncp").ncp;
 const { exec } = require('child_process');
+const Seven = require("node-7z");
+const sevenBin = require("7zip-bin");
+
+const pathTo7zip = sevenBin.path7za;
 
 module.exports = (projectName) => {
   const releaseOpt = {
@@ -35,20 +38,23 @@ module.exports = (projectName) => {
             fs.createWriteStream(zipFile)
           )
           .on("finish", () => {
-            fs.createReadStream(zipFile)
-              .pipe(unzip.Extract({ path: projectName }))
-              .on("finish", () => {
-                fs.unlinkSync(`${projectName}/chartbrew.zip`);
-                const files = fs.readdirSync(projectName);
-                ncp(`${projectName}/${files[0]}`, projectName, (err) => {
-                  if (err) {
-                    console.error(err);
-                    process.exit(1);
-                  }
-                  exec(`rm -rf ${projectName}/${files[0]}`, () => {});
-                  resolve();
-                });
+            const extractStream = Seven.extractFull(`${projectName}/chartbrew.zip`, projectName, {
+              $progress: true,
+              $bin: pathTo7zip,
+            });
+
+            extractStream.on("end", () => {
+              fs.unlinkSync(`${projectName}/chartbrew.zip`);
+              const files = fs.readdirSync(projectName);
+              ncp(`${projectName}/${files[0]}`, projectName, (err) => {
+                if (err) {
+                  console.error(err);
+                  process.exit(1);
+                }
+                exec(`rm -rf ${projectName}/${files[0]}`, () => {});
+                resolve();
               });
+            });
           });
       });
     });

@@ -20,15 +20,16 @@
   },
   "homepage": "https://github.com/razvanilin/create-chartbrew-app#readme",
   "dependencies": {
+    "7zip-bin": "^5.0.3",
     "boxen": "^4.1.0",
     "chalk": "^2.4.2",
     "child-process-promise": "^2.2.1",
     "commander": "^4.0.0",
     "ncp": "^2.0.0",
+    "node-7z": "^2.0.3",
     "prompts": "^2.2.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "rimraf": "^3.0.0",
-    "unzipper": "^0.10.5"
+    "rimraf": "^3.0.0"
   }
 }
