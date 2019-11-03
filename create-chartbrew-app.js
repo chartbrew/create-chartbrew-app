@@ -45,7 +45,7 @@ checkForUpdates()
       {
           type:'toggle',
           name: 'proceed',
-          message: "There is a new update for create-chartbrew-app. It's strongly recommended that you update before continuing. Do you want to proceed anyway?",
+          message: "There is a new update for create-chartbrew-app. It's strongly recommended that you update before continuing. Do you want to proceed without updating?",
           active: 'yes',
           inactive: 'no'
       };
