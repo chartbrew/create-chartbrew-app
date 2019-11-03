@@ -25,7 +25,6 @@
     "child-process-promise": "^2.2.1",
     "commander": "^4.0.0",
     "ncp": "^2.0.0",
-    "npm-run": "^4.1.2",
     "prompts": "^2.2.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
