@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/razvanilin/create-chartbrew-app.git"
+    "url": "git+https://github.com/chartbrew/create-chartbrew-app.git"
   },
   "author": "Razvan Ilin (razvanilin@gmail.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/razvanilin/create-chartbrew-app/issues"
+    "url": "https://github.com/chartbrew/create-chartbrew-app/issues"
   },
-  "homepage": "https://github.com/razvanilin/create-chartbrew-app#readme",
+  "homepage": "https://github.com/chartbrew/create-chartbrew-app#readme",
   "dependencies": {
     "7zip-bin": "^5.0.3",
     "boxen": "^4.1.0",

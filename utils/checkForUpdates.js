@@ -4,7 +4,7 @@ const appVersion = require('../package.json').version;
 
 module.exports = () => {
   const getOpt = {
-    url: "https://api.github.com/repos/razvanilin/create-chartbrew-app/releases/latest",
+    url: "https://api.github.com/repos/chartbrew/create-chartbrew-app/releases/latest",
     method: "GET",
     headers: {
       "Accept": "application/json",

@@ -10,6 +10,7 @@ const setupProject = require("./utils/setupProject");
 const changeSettings = require("./utils/changeSettings");
 const endInfo = require("./utils/endInfo");
 const checkForUpdates = require("./utils/checkForUpdates");
+const updateProject = require("./utils/updateProject");
 
 const program = new commander.Command(packageJson.name);
 
@@ -23,9 +24,15 @@ program
   .option('--dbname <dbname>', 'Database name')
   .option('--dbusername <dbusername>', 'Database username')
   .option('--dbpassword <dbpassword>', 'Database password')
-  .description('create a new application')
+  .description('create or update a ChartBrew application')
   .action(directory => {
     projectName = directory;
+  })
+  .on('--help', () => {
+    console.log(" ");
+    console.log("You can also update an existing app. Navigate to the root directory and run: ");
+    console.log(" ");
+    console.log("  $ create-chartbrew-app update");
   })
   .parse(process.argv);
 
@@ -38,6 +45,7 @@ if (projectName === undefined) {
 checkForUpdates()
   .then((response) => {
     if (!response.isNew) {
+      if (projectName === "update") return update();
       return installation();
     }
 
@@ -59,13 +67,17 @@ checkForUpdates()
       process.exit(0);
     }
 
-    installation();
+    projectName === "update" ? update() : installation();
   })
   .catch((error) => {
     // error
-    installation();
+    projectName === "update" ? update() : installation();
   });
 
+
+function update() {
+  updateProject();
+}
 
 function installation() {
   // check if the directory exists and if it's empty

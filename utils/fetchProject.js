@@ -6,19 +6,12 @@ const { exec } = require('child_process');
 const Seven = require("node-7z");
 const sevenBin = require("7zip-bin");
 
+const getLatestRelease = require("./getLatestRelease");
+
 const pathTo7zip = sevenBin.path7za;
 
 module.exports = (projectName) => {
-  const releaseOpt = {
-    url: "https://api.github.com/repos/razvanilin/chartbrew/releases/latest",
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-      "User-Agent": "create-chartbrew-app",
-    },
-  };
-
-  return requestP(releaseOpt)
+  return getLatestRelease()
     .then((response) => {
       const jsonResp = JSON.parse(response);
       const zipFile = `${projectName}/chartbrew.zip`;
