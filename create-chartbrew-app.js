@@ -11,6 +11,7 @@ const changeSettings = require("./utils/changeSettings");
 const endInfo = require("./utils/endInfo");
 const checkForUpdates = require("./utils/checkForUpdates");
 const updateProject = require("./utils/updateProject");
+const runMigrations = require("./utils/runMigrations");
 
 const program = new commander.Command(packageJson.name);
 
@@ -90,9 +91,13 @@ function installation() {
     createDirectory(projectName);
     fetchProject(projectName)
       .then(() => {
-        setupProject(projectName);
         changeSettings(projectName, program);
-        endInfo(program);
+
+        setTimeout(() => {
+          setupProject(projectName);
+          runMigrations(projectName);
+          endInfo(program, projectName);
+        }, 2000)
       })
       .catch((error) => {
         console.error(error);

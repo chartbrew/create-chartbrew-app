@@ -3,30 +3,39 @@ const readline = require("readline");
 const availableArgs = require("../config").args;
 
 module.exports = async (projectName, program) => {
-  const fileStream = fs.createReadStream(`${projectName}/server/.env-template`);
-  const newFileStream = fs.createWriteStream(`${projectName}/server/.env`);
+  console.log(" ");
+  console.log("Preparing the settings files...")
+  console.log(" ");
 
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-  });
-  // Note: we use the crlfDelay option to recognize all instances of CR LF
-  // ('\r\n') in input.txt as a single line break.
+  async function changeSettings(templatePath, envPath) {
+    const fileStream = fs.createReadStream(templatePath);
+    const newFileStream = fs.createWriteStream(envPath);
 
-  for await (const line of rl) {
-    const firstEqualIndex = line.indexOf("=");
-    const parameter = line.substring(0, firstEqualIndex);
-
-    let replaced = false;
-    Object.keys(availableArgs).forEach((arg) => {
-      if (availableArgs[arg].indexOf(parameter) > -1 && parameter.length > 0) {
-        newFileStream.write(`${parameter}=${program[arg]} \n`);
-        replaced = true;
-      }
+    const rl = readline.createInterface({
+      input: fileStream,
+      crlfDelay: Infinity
     });
+      // Note: we use the crlfDelay option to recognize all instances of CR LF
+      // ('\r\n') in input.txt as a single line break.
+      
+    for await (const line of rl) {
+      const firstEqualIndex = line.indexOf("=");
+      const parameter = line.substring(0, firstEqualIndex);
 
-    if (!replaced) {
-      newFileStream.write(`${line} \n`);
+      let replaced = false;
+      Object.keys(availableArgs).forEach((arg) => {
+        if (availableArgs[arg].indexOf(parameter) > -1 && parameter.length > 0) {
+          newFileStream.write(`${parameter}=${program[arg]} \n`);
+          replaced = true;
+        }
+      });
+
+      if (!replaced) {
+        newFileStream.write(`${line} \n`);
+      }
     }
   }
+
+  changeSettings(`${projectName}/server/.env-template`, `${projectName}/server/.env`);
+  changeSettings(`${projectName}/server/models/.env_template`, `${projectName}/server/models/.env`);
 };

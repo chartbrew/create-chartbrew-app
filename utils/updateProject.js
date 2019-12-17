@@ -5,8 +5,9 @@ const chalk = require("chalk");
 const prompts = require("prompts");
 
 const getLatestRelease = require("./getLatestRelease");
+const runMigrations = require("./runMigrations");
 
-module.exports = () => {
+module.exports = (projectName) => {
   // check if the package.json exists in the current directory
   let packageJson;
   try {
@@ -61,6 +62,12 @@ module.exports = () => {
 
       // merge changes
       spawnSync("git", ["merge", release.tag_name, "--allow-unrelated-histories"], { shell: true, stdio: 'inherit' });
+
+      spawnSync(`npm run`, ["setup"], { shell: true, stdio: 'inherit' });
+
+      console.log(" ");
+      console.log(chalk.blue("Updating your database..."))
+      runMigrations();
 
       console.log(" ");
       console.log(chalk.blue("Update completed"));
