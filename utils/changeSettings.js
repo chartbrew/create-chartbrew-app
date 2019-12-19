@@ -36,6 +36,5 @@ module.exports = async (projectName, program) => {
     }
   }
 
-  changeSettings(`${projectName}/server/.env-template`, `${projectName}/server/.env`);
-  changeSettings(`${projectName}/server/models/.env_template`, `${projectName}/server/models/.env`);
+  changeSettings(`${projectName}/.env-template`, `${projectName}/.env`);
 };
