@@ -14,11 +14,13 @@ module.exports = (program, projectName) => {
 
   console.log(chalk.green.bold("Next steps:"));
   console.log(" ");
+  console.log("To run in development: ");
   console.log(`${chalk.blue("Run the client app: ")} cd client && npm run start`);
   console.log(`${chalk.blue("Run the server app: ")} cd server && npm run start-dev`);
   console.log(" ");
 
-  console.log(chalk.bold("For more info please visit https://docs.chartbrew.com"));
+  console.log("To deploy your app in production:");
+  console.log(`${chalk.blue("Visit the documentation for instructions: ")} https://docs.chartbrew.com/deployment/`);
   console.log(" ");
 
   console.log(chalk.green.bold("Thank you for using ChartBrew! Join our communities below to get help and chat with other brewers"));
@@ -29,6 +31,6 @@ module.exports = (program, projectName) => {
   console.log(" ");
   console.log(chalk.green.bold("Or Discord:"));
   console.log(" ");
-  console.log(chalk.bold("https://discord.gg/Qt6drek"));
+  console.log(chalk.bold("https://discord.gg/KwGEbFk"));
   console.log(" ");
 };
