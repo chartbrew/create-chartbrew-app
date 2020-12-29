@@ -1,6 +1,6 @@
 # Create ChartBrew App
 
-A CLI tool for [📈 ChartBrew ☕](https://github.com/razvanilin/chartbrew)
+A CLI tool for [📈 Chartbrew ☕](https://github.com/razvanilin/chartbrew)
 
 ## 🚀 Get started
 
@@ -10,16 +10,13 @@ npx create-chartbrew-app myApp
 
 ## 👨‍💻 Arguments
 
-The CLI tool can create a `.env` file for you to get started right away. Just pass any of of the options below.
+Run the command below and complete fill in the details as you are prompted. You will need to have MySQL running and prepare an empty database that Chartbrew can use.
 
 ```sh
-npx create-chartbrew-app cbTest1 --dbname="chartbrewy" --dbhost="localhost" --dbport="3306" --dbusername="raz" --dbpassword="secretStuff"
+npx create-chartbrew-app chartbrew
 ```
 
-There are two `.env` files that need to be set with the database authentication parameters. If you haven't used the parameters above when you ran the command, create those files manually by following the templates found at:
-
-* `server/.env-template`
-* `server/models/.env_template`
+The CLI tool creates a `chartbrew/.env` file which you can configure at any time if you want to change the database, API & client host, etc. The file contains comments explaining what each environmental variable is for.
 
 ## 📦 Update an existing project
 
