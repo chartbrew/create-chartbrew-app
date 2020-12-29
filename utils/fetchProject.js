@@ -25,7 +25,7 @@ module.exports = (projectName) => {
         },
       };
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         request(downloadOpt)
           .pipe(
             fs.createWriteStream(zipFile)

@@ -12,6 +12,7 @@ const endInfo = require("./utils/endInfo");
 const checkForUpdates = require("./utils/checkForUpdates");
 const updateProject = require("./utils/updateProject");
 const runMigrations = require("./utils/runMigrations");
+const showPrompts = require('./utils/showPrompts');
 
 const program = new commander.Command(packageJson.name);
 
@@ -20,12 +21,7 @@ let projectName;
 program
   .version(packageJson.version)
   .arguments('<directory>')
-  .option('--dbhost <dbhost>', 'Database host')
-  .option('--dbport <dbport>', 'Database port')
-  .option('--dbname <dbname>', 'Database name')
-  .option('--dbusername <dbusername>', 'Database username')
-  .option('--dbpassword <dbpassword>', 'Database password')
-  .description('create or update a ChartBrew application')
+  .description('create or update a Chartbrew application')
   .action(directory => {
     projectName = directory;
   })
@@ -47,7 +43,7 @@ checkForUpdates()
   .then((response) => {
     if (!response.isNew) {
       if (projectName === "update") return update();
-      return installation();
+      return setTheVars();
     }
 
     const questions =
@@ -68,11 +64,11 @@ checkForUpdates()
       process.exit(0);
     }
 
-    projectName === "update" ? update() : installation();
+    projectName === "update" ? update() : setTheVars();
   })
   .catch((error) => {
     // error
-    projectName === "update" ? update() : installation();
+    projectName === "update" ? update() : setTheVars();
   });
 
 
@@ -80,7 +76,20 @@ function update() {
   updateProject();
 }
 
-function installation() {
+function setTheVars() {
+  console.log(chalk.yellow.bold("Please make sure you have MySQL running and you have an empty database that Chartbrew can use before proceeding."))
+  console.log(" ");
+  showPrompts()
+    .then((answers) => {
+      installation(answers);
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
+}
+
+function installation(answers) {
   // check if the directory exists and if it's empty
   fs.readdir(projectName, (err, files) => {
     if (files && files.length && files.length > 0) {
@@ -91,12 +100,12 @@ function installation() {
     createDirectory(projectName);
     fetchProject(projectName)
       .then(() => {
-        changeSettings(projectName, program);
+        changeSettings(projectName, answers);
 
         setTimeout(() => {
           setupProject(projectName);
           runMigrations(projectName);
-          endInfo(program, projectName);
+          endInfo(answers, projectName);
         }, 2000)
       })
       .catch((error) => {

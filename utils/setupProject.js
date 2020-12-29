@@ -1,4 +1,4 @@
-const { spawnSync } = require('child_process');
+const { spawnSync } = require("child_process");
 
 module.exports = (projectName) => {
   console.log("Setting up the project...");

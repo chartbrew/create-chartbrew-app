@@ -2,7 +2,7 @@ const fs = require("fs");
 const readline = require("readline");
 const availableArgs = require("../config").args;
 
-module.exports = async (projectName, program) => {
+module.exports = async (projectName, answers) => {
   console.log(" ");
   console.log("Preparing the settings files...")
   console.log(" ");
@@ -25,7 +25,7 @@ module.exports = async (projectName, program) => {
       let replaced = false;
       Object.keys(availableArgs).forEach((arg) => {
         if (availableArgs[arg].indexOf(parameter) > -1 && parameter.length > 0) {
-          newFileStream.write(`${parameter}=${program[arg]} \n`);
+          newFileStream.write(`${parameter}=${answers[arg]} \n`);
           replaced = true;
         }
       });
