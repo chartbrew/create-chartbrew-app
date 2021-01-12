@@ -2,9 +2,19 @@ const prompts = require("prompts");
 
 module.exports = () => {
   const questions = [{
+    type: "select",
+    name: "dialect",
+    message: "What database do you use?",
+    choices: [
+      { title: "MySQL", value: "mysql", selected: true },
+      { title: "PostgreSQL", value: "postgres" },
+    ],
+    hint: "- Arrow keys to select. Return to submit",
+  }, {
     type: "text",
     name: "dbname",
     message: "What's the name of your database? (default: 'chartbrew')",
+    initial: "chartbrew",
   }, {
     type: "text",
     name: "dbusername",

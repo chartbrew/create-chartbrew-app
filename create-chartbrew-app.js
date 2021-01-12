@@ -77,7 +77,7 @@ function update() {
 }
 
 function setTheVars() {
-  console.log(chalk.yellow.bold("Please make sure you have MySQL running and you have an empty database that Chartbrew can use before proceeding."))
+  console.log(chalk.yellow.bold("Please make sure you have a MySQL or PostgreSQL instance running and you have an empty database that Chartbrew can use before proceeding."))
   console.log(" ");
   showPrompts()
     .then((answers) => {

@@ -1,5 +1,6 @@
 module.exports = {
   args: {
+    dialect: ["CB_DB_DIALECT", "CB_DB_DIALECT_DEV"],
     dbhost: ["CB_DB_HOST", "CB_DB_HOST_DEV"],
     dbport: ["CB_DB_PORT", "CB_DB_PORT_DEV"],
     dbname: ["CB_DB_NAME", "CB_DB_NAME_DEV"],
