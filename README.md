@@ -1,26 +1,20 @@
-# Create ChartBrew App
+# Create your Chartbrew app
 
 A CLI tool for [📈 Chartbrew ☕](https://github.com/razvanilin/chartbrew)
 
 ## 🚀 Get started
 
+Run the command below and fill in the details as you are prompted. You will need to have MySQL running and prepare an empty database that Chartbrew can use.
+
 ```
 npx create-chartbrew-app myApp
-```
-
-## 👨‍💻 Arguments
-
-Run the command below and complete fill in the details as you are prompted. You will need to have MySQL running and prepare an empty database that Chartbrew can use.
-
-```sh
-npx create-chartbrew-app chartbrew
 ```
 
 The CLI tool creates a `chartbrew/.env` file which you can configure at any time if you want to change the database, API & client host, etc. The file contains comments explaining what each environmental variable is for.
 
 ## 📦 Update an existing project
 
-Navigate to the root of your ChartBrew project and run:
+Navigate to the root of your Chartbrew project and run:
 
 ```sh
 npx create-chartbrew-app update
