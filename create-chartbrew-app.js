@@ -11,7 +11,6 @@ const changeSettings = require("./utils/changeSettings");
 const endInfo = require("./utils/endInfo");
 const checkForUpdates = require("./utils/checkForUpdates");
 const updateProject = require("./utils/updateProject");
-const runMigrations = require("./utils/runMigrations");
 const showPrompts = require('./utils/showPrompts');
 
 const program = new commander.Command(packageJson.name);
@@ -104,7 +103,6 @@ function installation(answers) {
 
         setTimeout(() => {
           setupProject(projectName);
-          runMigrations(projectName);
           endInfo(answers, projectName);
         }, 2000)
       })
