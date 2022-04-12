@@ -2,6 +2,7 @@ const commander = require('commander');
 const fs = require("fs");
 const chalk = require("chalk");
 const prompts = require("prompts");
+const { nanoid } = require("nanoid");
 
 const packageJson = require('./package.json');
 const createDirectory = require("./utils/createProjectFolder");
@@ -80,7 +81,8 @@ function setTheVars() {
   console.log(" ");
   showPrompts()
     .then((answers) => {
-      installation(answers);
+      // also insert a unique string for the internal data encryption
+      installation({ ...answers, cbsecret: nanoid() });
     })
     .catch((err) => {
       console.error(err);
@@ -96,6 +98,9 @@ function installation(answers) {
       process.exit(1);
     }
 
+    console.log(" ");
+    console.log("Fetching the project files...")
+    console.log(" ");
     createDirectory(projectName);
     fetchProject(projectName)
       .then(() => {

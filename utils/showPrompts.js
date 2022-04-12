@@ -31,10 +31,6 @@ module.exports = () => {
     type: "text",
     name: "dbport",
     message: "On which port is your database running? (default: '3306')",
-  }, {
-    type: "text",
-    name: "cbsecret",
-    message: "Add a secret string to secure your user sessions and encrypt the data:",
   }];
 
   return prompts(questions);
